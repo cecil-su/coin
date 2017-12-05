@@ -33,7 +33,7 @@
       </div> -->
       <a class="coin-user-list-item" v-link="{name: 'user-about'}">
         <div class="flex center"><img src="../../assets/img/home/user-icon-4.png"></div>
-        <div class="flex center">关于我们</div>
+        <div class="flex center">玩法说明</div>
       </a>
     </div>
   </div>
