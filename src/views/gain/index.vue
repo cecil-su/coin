@@ -25,7 +25,7 @@
       <su-input :value.sync="num" place="0.00"></su-input>
       <div class="flex between">
         <div class="white">可投资金额：<span class="ye">{{o.coin}}</span></div>
-        <div class="white">投资占比：<span class="ye" v-if="o.coin_pool > 0">{{(num / o.coin_pool * 100).toFixed(2)}}%</span><span class="ye" v-else>0%</span></div>
+        <div class="white">投资占比：<span class="ye" v-if="o.coin_pool > 0">{{(num / (o.coin_pool + parseInt(num)) * 100).toFixed(2)}}%</span><span class="ye" v-else>0%</span></div>
       </div>
       <div class="btn-true" @click="postJoinGain(num)"></div>
     </div>
@@ -45,7 +45,7 @@
       <div class="title">我的投资</div>
       <div class="flex">
         <div class="flex center column">
-          <div class="white">上次盈亏</div>
+          <div class="white">昨日盈亏</div>
           <div class="ye">{{o.last_profit}}</div>
           <a class="btn" v-link="{name: 'gain-record'}">收益记录</a>
         </div>
@@ -67,7 +67,7 @@
   export default {
     data () {
       return {
-        num: '',
+        num: '0',
         show: false
       }
     },

@@ -3,7 +3,7 @@
     <div class="coin-gain-back">
       <div class="coin-gain-back-form">
         <div class="coin-gain-back-form-input"><input type="text" placeholder="撤资币数量" v-model="num"></div>
-        <!-- <div class="coin-gain-back-form-label">友情提示：撤资需要收取5%的手续费</div> -->
+        <div class="coin-gain-back-form-label">友情提示：撤资时间为每周日0：00 - 24：00</div>
         <div class="coin-gain-back-form-btn" @click="btnAction">确定</div>
         <div class="coin-gain-back-form-btn" @click="show = false">取消</div>
       </div>

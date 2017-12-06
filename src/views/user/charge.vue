@@ -18,7 +18,7 @@
       </div>
     </div>
     <div class="coin-user-charge-ad" v-if="adv">
-      <a class="img" :href="adv.url"><img :src="adv.icon"></a>
+      <a class="img" :href="adv.url"><img :src="adv.icon"><span style="color: #fff;">钱包下载</span></a>
       <!-- <div class="text">
         <div class="t">{{adv.name}}</div>
         <a class="btn" :href="adv.url">下载地址</a>
@@ -95,7 +95,7 @@
       justify-content: center;
       margin-top: 1.5rem;
       overflow: hidden;
-      .img {width: 1.5rem; img {width: 100%;}}
+      .img {width: 1.5rem;text-align: center;font-size: 0.3rem; img {width: 100%;}}
       .text {
         color: rgba(255,255,255,.8);
         font-size: 0.35rem;

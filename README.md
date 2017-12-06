@@ -1,4 +1,4 @@
-# coin
+# coin-1
 
 > A Vue.js project
 
