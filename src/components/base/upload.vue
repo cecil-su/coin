@@ -104,7 +104,7 @@
         let xhr = new window.XMLHttpRequest()
         let formdata = this.getFormData()
         formdata.append('file', blob)
-        xhr.open('post', 'http://new_game.yiqu365.com/api/user/upload_image?sid=' + this.getCookie('bhw_sid') + '&scode=' + this.getCookie('bhw_scode'))
+        xhr.open('post', window.Game.apiHost + 'user/upload_image?sid=' + this.getCookie('bhw_sid') + '&scode=' + this.getCookie('bhw_scode'))
         // xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
         xhr.onreadystatechange = function () {
           console.log(xhr)
