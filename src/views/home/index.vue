@@ -125,7 +125,7 @@
     .swiper-slide {background: url(../../assets/img/home/gamebg.png) no-repeat center center;height: 4rem;width: 4rem;background-size: 100% 100%;opacity: 0.5;}
     .swiper-slide-active {opacity: 1;}
     .swiper-slide .link {display: block;}
-    .swiper-slide .img {display: block;height: 3.5rem;width: 3.5rem;margin: 0.25rem 0 0 0.25rem;overflow: hidden;clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);}
+    .swiper-slide .img {display: block;height: 4rem;width: 4rem;margin: 0;overflow: hidden;clip-path: polygon(50% 0%, 100% 50%, 50% 100%, 0% 50%);}
     .swiper-slide .text {color: #ffd600;font-size: 0.35rem;margin-top: 0.2rem;text-align: center;}
     .swiper-container-3d .swiper-slide-shadow-left,.swiper-container-3d .swiper-slide-shadow-right {background-image: none;}
   }
