@@ -204,6 +204,22 @@ export const postSignIn = ({dispatch}, name, pwd) => {
     }
   })
 }
+/* ---- 从比特钱包token登录接口 ---- */
+export const postTokenSignIn = ({dispatch}, token) => {
+    let type = window.localStorage.getItem('bhwCoinType')
+    http('user/external_token_login', 'POST', {'token': token, 'scode': _scode, 'coin_type': type}).then(res => {
+        if (res.error === 0 && res.sid !== '') {
+            _this.$suToast.center('c', res.msg, 1000)
+            setCookie({dispatch}, 'bhw_sid', res.sid, 30)
+            setTimeout(() => {
+                _this.$route.router.go({path: '/user'})
+            }, 1000)
+        } else {
+            _this.$suToast.center('', res.msg, 1000)
+        }
+    })
+
+}
 /* ----- 注册接口 ----- */
 export const postSignUp = ({dispatch}, name, pwd, repwd) => {
   let type = window.localStorage.getItem('bhwCoinType')

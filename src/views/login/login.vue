@@ -11,23 +11,32 @@
 </template>
 
 <script>
-  import { initLoad, setCoinType } from '../../vuex/actions'
+  import { initLoad, setCoinType ,postTokenSignIn} from '../../vuex/actions'
   export default {
-    vuex: {
-      actions: {
-        initLoad,
-        setCoinType
+      vuex: {
+          actions: {
+              initLoad,
+              setCoinType,
+              postTokenSignIn
+          },
+          getters: {
+              load: (state) => state.login
+          }
       },
-      getters: {
-        load: (state) => state.login
+      route: {
+          data () {
+              this.initLoad()
+          }
+      },
+      ready(){
+          let token = this.$route.query.token
+          console.log(token)
+          if (token != null) {
+              this.postTokenSignIn(token)
+          }
       }
-    },
-    route: {
-      data () {
-        this.initLoad()
-      }
-    }
   }
+
 </script>
 
 <style lang="less">
