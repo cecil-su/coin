@@ -1,5 +1,5 @@
 <template>
-  <div class="coin-user-password" style="padding-bottom: 1rem;background: #353575;padding: 0.5rem 0.25rem 1.5rem;">
+  <div style="padding-bottom: 1rem;background: #353575;padding: 0.5rem 0.25rem 1.5rem;">
     <div class="flex center column white">
       <p style="font-size: 0.3rem;">
         <span style="color: red;">玩法说明</span><br>

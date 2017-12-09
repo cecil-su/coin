@@ -82,7 +82,7 @@ export const updateGainRecord = ({dispatch}) => {
     if (res && res.length > 0) {
       dispatch('PUSH_LOG', 'profit', res)
     } else {
-      _this.$suToast.center('', 'NO MORE DATA', 1000)
+      _this.$suToast.center('', '没有更多数据', 1000)
     }
   })
 }
@@ -92,7 +92,7 @@ export const updateGainLog = ({dispatch}) => {
     if (res && res.length > 0) {
       dispatch('PUSH_LOG', 'join', res)
     } else {
-      _this.$suToast.center('', 'NO MORE DATA', 1000)
+      _this.$suToast.center('', '没有更多数据', 1000)
     }
   })
 }
@@ -161,12 +161,13 @@ export const initUserCash = ({dispatch}) => {
 }
 export const postUserCash = ({dispatch}, num, adr) => {
   if (num === '' || num === undefined) { num = 0 }
-  http('user/cash', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'value': num, 'address': adr}).then(res => {
+  return http('user/cash', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'value': num, 'address': adr}).then(res => {
     if (res && res.error === 0) {
       _this.$suToast.center('', res.msg, 1000)
     } else {
       _this.$suToast.center('', res.msg, 1000)
     }
+    return res
   })
 }
 export const initUserLog = ({dispatch}) => {
@@ -181,7 +182,7 @@ export const updateUserLog = ({dispatch}) => {
     if (res && res.length > 0) {
       dispatch('PUSH_LOG', 'charge', res)
     } else {
-      _this.$suToast.center('', 'NO MORE DATA', 1000)
+      _this.$suToast.center('', '没有更多数据', 1000)
     }
   })
 }
@@ -202,6 +203,22 @@ export const postSignIn = ({dispatch}, name, pwd) => {
       _this.$suToast.center('', res.msg, 1000)
     }
   })
+}
+/* ---- 从比特钱包token登录接口 ---- */
+export const postTokenSignIn = ({dispatch}, token) => {
+    let type = window.localStorage.getItem('bhwCoinType')
+    http('user/external_token_login', 'POST', {'token': token, 'scode': _scode, 'coin_type': type}).then(res => {
+        if (res.error === 0 && res.sid !== '') {
+            _this.$suToast.center('c', res.msg, 1000)
+            setCookie({dispatch}, 'bhw_sid', res.sid, 30)
+            setTimeout(() => {
+                _this.$route.router.go({path: '/user'})
+            }, 1000)
+        } else {
+            _this.$suToast.center('', res.msg, 1000)
+        }
+    })
+
 }
 /* ----- 注册接口 ----- */
 export const postSignUp = ({dispatch}, name, pwd, repwd) => {

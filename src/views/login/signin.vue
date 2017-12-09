@@ -9,7 +9,7 @@
       </div>
       <div class="flex between">
         <input type="button" class="btn-r" @click="postSignIn(name, pwd)">
-        <input type="button" class="btn-b" @click="this.$route.router.go({name: 'signup'})">
+        <!--<input type="button" class="btn-b" @click="this.$route.router.go({name: 'signup'})">-->
       </div>
     </div>
   </div>
@@ -93,6 +93,7 @@
       .btn-r {
         background: url(../../assets/img/login/btn-r.png) no-repeat center center;
         background-size: 100% 100%;
+        margin: 0 auto;
         border: none;
         height: 0.76rem;
         width: 2.55rem;
