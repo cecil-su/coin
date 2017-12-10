@@ -189,6 +189,28 @@ export const updateUserLog = ({dispatch}) => {
 export const initUserCog = ({dispatch}) => {
   setHeader({dispatch}, {'title': '设置', 'linkLeft': '/user'})
 }
+/* ----- 推广中心 -----*/
+export const initUserSpread = ({dispatch}) => {
+  setHeader({dispatch}, {'title': '推广中心', 'linkLeft': '/user', 'textRight': '推广说明', 'linkRight': '/user/spread/info'})
+}
+
+export const initUserSpreadInfo = ({dispatch}) => {
+  setHeader({dispatch}, {'title': '推广说明', 'linkLeft': '/user/spread'})
+
+}
+
+export const initUserSpreadLevel = ({dispatch}) => {
+  setHeader({dispatch}, {'title': '快速升级', 'linkLeft': '/user/spread'})
+}
+
+export const initUserSpreadReward = ({dispatch}) => {
+  setHeader({dispatch}, {'title': '推广奖励', 'linkLeft': '/user/spread'})
+}
+
+export const initUserSpreadPerson = ({dispatch}) => {
+  setHeader({dispatch}, {'title': '推广人数', 'linkLeft': '/user/spread'})
+}
+
 /* ----- 登陆接口 ----- */
 export const postSignIn = ({dispatch}, name, pwd) => {
   let type = window.localStorage.getItem('bhwCoinType')

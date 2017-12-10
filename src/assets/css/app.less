@@ -188,7 +188,7 @@ body {background-color: @body-bg;}
   position: relative;
   &-title {color: #fff;margin: 0 auto;overflow: hidden;text-align: center;text-overflow: ellipsis;white-space: nowrap;width: 70%;}
   &-l {align-items: center;display: flex;height: 100%;position: absolute;left: 0.25rem;top: 0;}
-  &-r {align-items: center;display: flex;height: 100%;position: absolute;right: 0.25rem;top: 0; img {width: 0.5rem;}}
+  &-r {align-items: center;display: flex;height: 100%;position: absolute;right: 0.25rem;top: 0;color: #fff;font-size: 0.3rem;a {color: #fff;} img {width: 0.5rem;}}
   &-back {
     background: url('../../assets/img/home/icon-back.png') no-repeat center center;
     background-size: 100% 100%;
@@ -227,9 +227,18 @@ body {background-color: @body-bg;}
 .flex {
   display: flex;
   &.center {align-items: center;justify-content: center;}
+  &.center-v {justify-content: center;}
+  &.center-h {align-items: center;}
   &.between {justify-content: space-between;}
   &.column {flex-direction: column;}
   &.end {justify-content: flex-end;}
+  &-item {
+    flex: 1;
+  }
+}
+
+.text-center {
+  text-align: center;
 }
 
 .fixed {

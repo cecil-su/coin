@@ -25,8 +25,8 @@ window.Game.isLogin = false
 window.Game.refreshShow = false
 window.Game.scrollLoad = false
 window.Game.debug = 1
-// window.Game.apiHost = 'http://new_game.yiqu365.com/api/'
-window.Game.apiHost = 'http://localhost:8014/api/'
+window.Game.apiHost = 'http://new_game.yiqu365.com/api/'
+// window.Game.apiHost = 'http://localhost:8014/api/'
 window.Game.localHost = 'http://' + window.location.host + '/'
 
 routerMap(router)

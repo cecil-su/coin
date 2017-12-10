@@ -57,6 +57,12 @@
       .item {
         flex: 1;
         text-align: center;
+        &:first-child {
+          text-align: left;
+        }
+        &:last-child {
+          text-align: right;
+        }
       }
     }
     &-list {
@@ -80,7 +86,15 @@
         }
         .s {color: #3ce00a;}
         .f {color: #fd1f1f;}
-        .item {flex: 1;text-align: center;}
+        .item {
+          flex: 1;text-align: center;
+          &:first-child {
+            text-align: left;
+          }
+          &:last-child {
+            text-align: right;
+          }
+        }
       }
     }
   }
