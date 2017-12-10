@@ -52,6 +52,26 @@ export default (router) => {
       name: 'user-log',
       component: require('./views/user/log')
     },
+    '/user/spread': {
+      name: 'user-spread',
+      component: require('./views/user/spread.vue')
+    },
+    '/user/spread/info': {
+      name: 'user-spread-info',
+      component: require('./views/user/spread-info.vue')
+    },
+    '/user/spread/level': {
+      name: 'user-spread-level',
+      component: require('./views/user/spread-level.vue')
+    },
+    '/user/spread/reward': {
+      name: 'user-spread-reward',
+      component: require('./views/user/spread-reward.vue')
+    },
+    '/user/spread/person': {
+      name: 'user-spread-person',
+      component: require('./views/user/spread-person.vue')
+    },
     '/login': {
       name: 'login',
       component: require('./views/login/login')

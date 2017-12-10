@@ -27,13 +27,21 @@
         <div class="flex center"><img src="../../assets/img/home/user-icon-2.png"></div>
         <div class="flex center">修改密码</div>
       </a>
-     <!--  <div class="coin-user-list-item">
+      <a class="coin-user-list-item" v-link="{name: 'user-cog'}">
         <div class="flex center"><img src="../../assets/img/home/user-icon-3.png"></div>
         <div class="flex center">设置</div>
-      </div> -->
+      </a>
       <a class="coin-user-list-item" v-link="{name: 'user-about'}">
         <div class="flex center"><img src="../../assets/img/home/user-icon-4.png"></div>
         <div class="flex center">玩法说明</div>
+      </a>
+      <a class="coin-user-list-item" v-link="{name: 'user-spread'}">
+        <div class="flex center">
+          <div class="img-sp flex center">
+            <img src="../../assets/img/home/user-icon-5.png">
+          </div>
+        </div>
+        <div class="flex center">推广中心</div>
       </a>
     </div>
   </div>
@@ -116,6 +124,7 @@
         flex-basis: 33.3333%;
         width: 33.3333%;
         img {margin-bottom: 0.2rem; width: 1.1rem;}
+        .img-sp {background: #FF7AA8;border-radius: 50%;height: 1.1rem;width: 1.1rem;margin-bottom: 0.2rem; img {width: 0.7rem;margin-bottom: 0;}}
       }
     }
   }

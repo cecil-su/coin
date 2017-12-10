@@ -13,13 +13,15 @@
         <su-input :value.sync="num"></su-input>
         <div class="ye" style="margin-top:0.2rem;">{{user.desc}}</div>
       </div>
-      <div class="flex">
-        <div>提币地址</div>
+      <div class="coin-user-charge-radio">
+        <span v-for="item in radios" @click="hanldeRadio($index)" style="margin-right: 0.5rem;"><span class="item" v-bind:class="{active: currentRadioIndex == $index}"></span>{{item}}</span>
       </div>
-      <div class="coin-user-charge-form-input">
+      <div class="btn" @click="postUser" v-show="currentRadioIndex == 0"></div>
+
+      <div class="coin-user-charge-form-input" v-show="currentRadioIndex == 1">
         <su-input :value.sync="adr"></su-input>
       </div>
-      <div class="btn" @click="postUser"></div>
+      <div class="btn" @click="postUser" v-show="currentRadioIndex == 1"></div>
       <!-- <div class="flex center">为了您的账户安全,每笔提币数量不能超过500000000,如果您有更高的需求,请与网站客服联系,提币手续费为0.</div> -->
     </div>
   </div>
@@ -31,6 +33,8 @@
   export default {
     data () {
       return {
+        radios: ['比特支付', '其他钱包'],
+        currentRadioIndex: 0,
         num: '',
         adr: ''
       }
@@ -61,6 +65,9 @@
             this.adr = ''
           }
         })
+      },
+      hanldeRadio (i) {
+        this.currentRadioIndex = i
       }
     }
   }

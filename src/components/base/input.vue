@@ -49,7 +49,7 @@
   .su-input {
     width: 100%;
     position: relative;
-    input {box-sizing: border-box;font-family: 微软雅黑; width: 100%;}
+    input {box-sizing: border-box;font-family: 微软雅黑; width: 100%;font-size: 0.3rem;}
     &-clear {
       color: red;
       font-size: 0.5rem;
