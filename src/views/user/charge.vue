@@ -19,7 +19,7 @@
         <div class="text">{{coin.address}}</div>
       </div>
       <div class="coin-user-charge-form">
-        <a class="btn" @click="handleCopy">复制地址</a>
+        <a class="btn address" @click="handleCopy"></a>
         <div class="s">我们将在收到3次确认以后为您充值成功</div>
       </div>
     </div>
@@ -139,7 +139,7 @@
         }
         .text {font-size: 0.3rem;line-height: 0.9rem;text-align: center;}
         .btn {
-          background: url(../../assets/img/home/charge-btn.png) no-repeat center center;
+          background: url(../../assets/img/home/true-btn.png) no-repeat center center;
           background-size: 100% 100%;
           display: block;
           height: 0.75rem;
@@ -156,6 +156,10 @@
         height: 0.75rem;
         margin: 1rem auto 0.5rem;
         width: 3.2rem;
+        &.address {
+          background: url(../../assets/img/home/address-btn.png) no-repeat center center;
+          background-size: 100% 100%;
+        }
       }
       .flex.center {font-size: 0.2rem;}
     }
