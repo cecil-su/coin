@@ -5,7 +5,7 @@
         <img :src="user.avatar">
       </div>
       <div class="text">
-        <div class="flex center white">{{user.username}}</div>
+        <div class="flex center white">{{user.name}}</div>
         <div class="flex center">
           <div class="img flex center"><img :src="user.icon"></div>
           <div class="coin white">{{user.coin_name}}</div>

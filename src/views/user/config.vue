@@ -10,11 +10,11 @@
       <div class="info">
         <div class="flex center">昵称：</div>
         <div class="name">
-          <input type="text" v-model="user.username">
+          <input type="text" v-model="user.name">
         </div>
       </div>
     </div>
-    <input type="button" class="coin-user-config-btn" value="确定" @click="postChangeUser(url, user.username)">
+    <input type="button" class="coin-user-config-btn" value="确定" @click="postChangeUser(url, user.name)">
   </div>
 </template>
 
