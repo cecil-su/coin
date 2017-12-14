@@ -234,7 +234,7 @@ export const postTokenSignIn = ({dispatch}, token) => {
             _this.$suToast.center('c', res.msg, 1000)
             setCookie({dispatch}, 'bhw_sid', res.sid, 30)
             setTimeout(() => {
-                _this.$route.router.go({path: '/user'})
+                _this.$route.router.go({path: ''})
             }, 1000)
         } else {
             _this.$suToast.center('', res.msg, 1000)

@@ -12,6 +12,7 @@
 
 <script>
   import { initLoad, setCoinType ,postTokenSignIn} from '../../vuex/actions'
+  let token = null;
   export default {
       vuex: {
           actions: {
@@ -28,12 +29,17 @@
               this.initLoad()
           }
       },
-      ready(){
-          let token = this.$route.query.token
-          console.log(token)
+      beforeDestroy: function () {
+
           if (token != null) {
+              this.initLoad();
               this.postTokenSignIn(token)
+
           }
+      },
+      ready(){
+          token = this.$route.query.token
+//          console.log(token)
       }
   }
 
