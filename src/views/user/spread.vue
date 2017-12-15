@@ -5,7 +5,7 @@
         <div class="flex user">
           <img src="http://new_game.yiqu365.com/images/static/default.jpg">
           <div class="flex column center-v">
-            <div>周小志(ID：1243)</div>
+            <div>{{user.name}}(ID：{{user.id}})</div>
             <div>黄金会员</div>
           </div>
         </div>
@@ -18,7 +18,7 @@
           <div class="flex center">推广链接：</div>
           <div class="flex center" style="font-size: 0.25rem;">长按复制</div>
         </div>
-        <div style="font-size: 0.23rem;margin-top: 0.3rem;">http://www.iconfont.cn/search/index?q%E6A8%E5%B9&page=1</div>
+        <div style="font-size: 0.23rem;margin-top: 0.3rem;">http://h5.owncoins.net/html/register.html?invite_id={{user.id}}</div>
       </div>
     </div>
     <div class="coin-user-spread-item flex">
@@ -50,32 +50,37 @@
 </template>
 
 <script>
-  import { initUserSpread } from '../../vuex/actions'
+  import { initUserSpread,initUser } from '../../vuex/actions'
   export default {
-    data () {
-      return {
-        vips: [
-          {name: '普通会员', number: '20'},
-          {name: '黄金会员', number: '20'},
-          {name: '钻石会员', number: '20'}
-        ],
-        roles: [
-          {name: '渠道商', number: '20'},
-          {name: '代理人', number: '20'},
-          {name: '合伙人', number: '20'}
-        ]
-      }
-    },
-    vuex: {
-      actions: {
-        initUserSpread,
-      }
-    },
-    route: {
       data () {
-        this.initUserSpread()
+          return {
+              vips: [
+                  {name: '普通会员', number: '20'},
+                  {name: '黄金会员', number: '20'},
+                  {name: '钻石会员', number: '20'}
+              ],
+              roles: [
+                  {name: '渠道商', number: '20'},
+                  {name: '代理人', number: '20'},
+                  {name: '合伙人', number: '20'}
+              ],
+          }
+      },
+      vuex: {
+          actions: {
+              initUserSpread,
+              initUser,
+          },
+          getters: {
+              user: (state) => state.user
+          }
+      },
+      route: {
+          data () {
+              this.initUserSpread()
+              this.initUser()
+          }
       }
-    }
   }
 </script>
 
