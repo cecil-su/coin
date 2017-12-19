@@ -18,7 +18,7 @@
           <div class="flex center">推广链接：</div>
           <div class="flex center" style="font-size: 0.25rem;">长按复制</div>
         </div>
-        <div style="font-size: 0.23rem;margin-top: 0.3rem;">http://h5.owncoins.net/html/register.html?invite_id={{user.id}}</div>
+        <div style="font-size: 0.23rem;margin-top: 0.3rem;">http://h5.owncoins.net/html/register.html?invite_id={{user.btzf_id}}</div>
       </div>
     </div>
     <div class="coin-user-spread-item flex">

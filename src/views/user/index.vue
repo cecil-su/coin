@@ -35,7 +35,7 @@
         <div class="flex center"><img src="../../assets/img/home/user-icon-4.png"></div>
         <div class="flex center">玩法说明</div>
       </a>
-      <a class="coin-user-list-item" v-link="{name: 'user-spread'}">
+      <a class="coin-user-list-item " v-if="user.btzf_id != null" v-link="{name: 'user-spread'}">
         <div class="flex center">
           <div class="img-sp flex center">
             <img src="../../assets/img/home/user-icon-5.png">
@@ -56,13 +56,14 @@
       },
       getters: {
         user: (state) => state.user
-      }
+      },
     },
     route: {
       data () {
         this.initUser()
+
       }
-    }
+    },
   }
 </script>
 
