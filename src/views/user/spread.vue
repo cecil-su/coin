@@ -6,7 +6,7 @@
           <img src="http://new_game.yiqu365.com/images/static/default.jpg">
           <div class="flex column center-v">
             <div>{{user.name}}(ID：{{user.id}})</div>
-            <div>黄金会员</div>
+            <div>{{user.vip_name}}</div>
           </div>
         </div>
         <div class="flex center">
@@ -29,20 +29,32 @@
       </div>
       <div class="flex-item text-center">
         <div>推广人数</div>
-        <div class="text-small"><span class="text-big">567</span>人</div>
+        <div class="text-small"><span class="text-big">{{downLine.num}}</span>人</div>
         <a class="yellow" v-link="{name: 'user-spread-person'}">查看明细</a>
       </div>
     </div>
     <div class="coin-user-spread-item">
-      <div class="title">推广奖励</div>
+      <div class="title">推广统计</div>
       <div class="flex between content">
-        <div class="text-center" v-for="item in vips">
-          {{item.name}}<br>{{item.number}}
+        <div class="text-center">
+          普通会员<br> {{downLine.ordinary_member}}
+        </div>
+        <div class="text-center">
+          黄金会员<br> {{downLine.gold_member}}
+        </div>
+        <div class="text-center">
+          钻石会员<br> {{downLine.diamond_member}}
         </div>
       </div>
       <div class="flex between content">
-        <div class="text-center" v-for="item in roles">
-          {{item.name}}<br>{{item.number}}
+        <div class="text-center">
+          渠道商<br> {{downLine.channel_dealer}}
+        </div>
+        <div class="text-center">
+          代理人<br> {{downLine.agent}}
+        </div>
+        <div class="text-center">
+          合伙人<br> {{downLine.partner}}
         </div>
       </div>
     </div>
@@ -72,7 +84,8 @@
               initUser,
           },
           getters: {
-              user: (state) => state.user
+              user: (state) => state.user,
+              downLine: (state) => state.downLine
           }
       },
       route: {

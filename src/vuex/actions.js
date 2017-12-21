@@ -192,6 +192,9 @@ export const initUserCog = ({dispatch}) => {
 /* ----- 推广中心 -----*/
 export const initUserSpread = ({dispatch}) => {
   setHeader({dispatch}, {'title': '推广中心', 'linkLeft': '/user', 'textRight': '推广说明', 'linkRight': '/user/spread/info'})
+  http('user/downline', 'GET', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode}).then(res => {
+      dispatch('SET_DOWNLINE', res)
+  })
 }
 
 export const initUserSpreadInfo = ({dispatch}) => {

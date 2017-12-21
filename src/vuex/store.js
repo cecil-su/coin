@@ -16,6 +16,9 @@ const state = {
   home: {},
   gain: {},
   user: {},
+  downLine: {
+      downlineData:[]
+  },
   login: [],
   record: {
     join: [],
@@ -40,6 +43,9 @@ const mutations = {
   },
   SET_USER (state, val) {
     state.user = val
+  },
+  SET_DOWNLINE (state, val) {
+    state.downLine = val
   },
   SET_LOGIN (state, val) { // 引导页
     state.login = val
