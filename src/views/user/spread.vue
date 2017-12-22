@@ -64,20 +64,6 @@
 <script>
   import { initUserSpread,initUser } from '../../vuex/actions'
   export default {
-      data () {
-          return {
-              vips: [
-                  {name: '普通会员', number: '20'},
-                  {name: '黄金会员', number: '20'},
-                  {name: '钻石会员', number: '20'}
-              ],
-              roles: [
-                  {name: '渠道商', number: '20'},
-                  {name: '代理人', number: '20'},
-                  {name: '合伙人', number: '20'}
-              ],
-          }
-      },
       vuex: {
           actions: {
               initUserSpread,
