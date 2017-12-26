@@ -37,24 +37,24 @@
       <div class="title">推广统计</div>
       <div class="flex between content">
         <div class="text-center">
-          普通会员<br> {{downLine.ordinary_member}}
+          普通会员<br> {{downLine.downVip[0]?downLine.downVip[0]:0}}
         </div>
         <div class="text-center">
-          黄金会员<br> {{downLine.gold_member}}
+          黄金会员<br> {{downLine.downVip[1]?downLine.downVip[1]:0}}
         </div>
         <div class="text-center">
-          钻石会员<br> {{downLine.diamond_member}}
+          钻石会员<br> {{downLine.downVip[2]?downLine.downVip[2]:0}}
         </div>
       </div>
       <div class="flex between content">
         <div class="text-center">
-          渠道商<br> {{downLine.channel_dealer}}
+          渠道商<br> {{downLine.downVip[3]?downLine.downVip[3]:0}}
         </div>
         <div class="text-center">
-          代理人<br> {{downLine.agent}}
+          代理人<br> {{downLine.downVip[4]?downLine.downVip[4]:0}}
         </div>
         <div class="text-center">
-          合伙人<br> {{downLine.partner}}
+          合伙人<br> {{downLine.downVip[5]?downLine.downVip[5]:0}}
         </div>
       </div>
     </div>

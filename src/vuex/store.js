@@ -17,7 +17,8 @@ const state = {
   gain: {},
   user: {},
   downLine: {
-      downlineData:[]
+      downlineData:[],
+      downVip:[]
   },
   downLineLog:[],
   login: [],
