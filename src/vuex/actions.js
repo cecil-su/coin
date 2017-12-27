@@ -16,8 +16,11 @@ export const initLoad = ({dispatch}) => {
     dispatch('SET_LOGIN', res)
   })
 }
-export const setCoinType = ({dispatch}, val, coin) => {
-  if (window.localStorage.getItem('bhwCoinType') !== null) {
+export const setCoinType = ({dispatch}, val, coin, token) => {
+  if (token !== undefined) {
+    postTokenSignIn({dispatch}, val, token)
+  }
+  if (window.localStorage.getItem('bhwCoinType') !== null && getCookie({dispatch}, 'bhw_sid')) {
     http('user/change_coin', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'coin_type': val}).then(res => {
       if (res.error === 0) {
         _this.$suToast.center('', res.msg, 1000)
@@ -210,7 +213,12 @@ export const initUserSpreadLevel = ({dispatch}) => {
 export const postVipLevelUp = ({dispatch}, vip_rice) => {
     http('user/vipLevel_upAction', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'vip_rice': vip_rice}).then(res => {
         if (res.error === 0) {
+          _this.$suToast.center('', res.msg, 1000)
+          http('user/index', 'GET', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode}).then(res => {
+            dispatch('SET_USER', res)
+          })
         } else {
+          _this.$suToast.center('', res.msg, 1000)
         }
     })
 }
@@ -242,9 +250,9 @@ export const postSignIn = ({dispatch}, name, pwd) => {
   })
 }
 /* ---- 从比特钱包token登录接口 ---- */
-export const postTokenSignIn = ({dispatch}, token) => {
-    let type = window.localStorage.getItem('bhwCoinType')
-    http('user/external_token_login', 'POST', {'token': token, 'scode': _scode, 'coin_type': type}).then(res => {
+export const postTokenSignIn = ({dispatch}, coin, token) => {
+    // let type = window.localStorage.getItem('bhwCoinType')
+    http('user/external_token_login', 'POST', {'token': token, 'scode': _scode, 'coin_type': coin}).then(res => {
         if (res.error === 0 && res.sid !== '') {
             _this.$suToast.center('c', res.msg, 1000)
             setCookie({dispatch}, 'bhw_sid', res.sid, 30)

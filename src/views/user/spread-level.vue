@@ -4,21 +4,21 @@
             <div class="flex between level">
                 <div>渠道商</div>
                 <div style="color: red;">支付200MCC</div>
-                <div><a class="btn"  @click="handleLevelUpdate" :class="[user.vip_level > 2 ? 'disabled':'']">升级</a></div>
+                <div><a class="btn"  @click="handleLevelUpdate(3)" :class="[user.vip_level > 2 ? 'disabled':'']">升级</a></div>
             </div>
         </div>
         <div class="coin-user-spread-item">
             <div class="flex between level">
                 <div>代理商</div>
                 <div style="color: red;">支付2000MCC</div>
-                <div><a class="btn" @click="handleLevelUpdate" :class="[user.vip_level > 3 ? 'disabled':'']">升级</a></div>
+                <div><a class="btn" @click="handleLevelUpdate(4)" :class="[user.vip_level > 3 ? 'disabled':'']">升级</a></div>
             </div>
         </div>
         <div class="coin-user-spread-item">
             <div class="flex between level">
                 <div>合伙人</div>
                 <div style="color: red;">支付5000MCC</div>
-                <div><a class="btn"  @click="handleLevelUpdate" :class="[user.vip_level > 4 ? 'disabled':'']">升级</a></div>
+                <div><a class="btn"  @click="handleLevelUpdate(5)" :class="[user.vip_level > 4 ? 'disabled':'']">升级</a></div>
             </div>
         </div>
         <div class="coin-user-spread-mask" v-show="alertVisible" @click="alertVisible = false">
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import {initUserSpreadLevel, initUser} from '../../vuex/actions'
+    import {initUserSpreadLevel, postVipLevelUp} from '../../vuex/actions'
     export default {
         data () {
             return {
@@ -45,6 +45,7 @@
             actions: {
 //                initUser,
                 initUserSpreadLevel,
+                postVipLevelUp
             },
             getters: {
                 user: (state) => state.user
@@ -57,8 +58,9 @@
             }
         },
         methods: {
-            handleLevelUpdate () {
-                this.alertVisible = true
+            handleLevelUpdate (val) {
+                // if (user.) {} 需要判断余额是否足够，不足弹出提示框
+                this.postVipLevelUp(val)
             }
         }
     }

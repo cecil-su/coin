@@ -1,7 +1,7 @@
 <template>
   <div class="coin-load">
     <div class="coin-load-box" v-if="load">
-      <div class="coin-load-box-item" v-for="item in load" @click="setCoinType(item.coin_type, item.icon)">
+      <div class="coin-load-box-item" v-for="item in load" @click="setCoinType(item.coin_type, item.icon, $route.query.token)">
         <div class="img"><img :src="item.icon"></div>
         <div class="white">{{item.name}}</div>
         <div class="red">{{item.player}}人在玩</div>
@@ -29,18 +29,19 @@
               this.initLoad()
           }
       },
-      beforeDestroy: function () {
+      // beforeDestroy: function () {
 
-          if (token != null) {
-              this.initLoad();
-              this.postTokenSignIn(token)
+      //     if (token != null) {
+      //         this.initLoad();
+      //         this.postTokenSignIn(token)
 
-          }
-      },
-      ready(){
-          token = this.$route.query.token
-//          console.log(token)
-      }
+      //     }
+      // },
+//       ready(){
+//           console.log(this.$route.query.token)
+//           token = this.$route.query.token
+// //          console.log(token)
+//       }
   }
 
 </script>
