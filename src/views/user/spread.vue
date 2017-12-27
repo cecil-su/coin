@@ -35,7 +35,7 @@
     </div>
     <div class="coin-user-spread-item">
       <div class="title">推广统计</div>
-      <div class="flex between content">
+      <div class="flex between content" v-if="downLine">
         <div class="text-center">
           普通会员<br> {{downLine.downVip[0]?downLine.downVip[0]:0}}
         </div>
@@ -46,7 +46,7 @@
           钻石会员<br> {{downLine.downVip[2]?downLine.downVip[2]:0}}
         </div>
       </div>
-      <div class="flex between content">
+      <div class="flex between content" v-if="downLine">
         <div class="text-center">
           渠道商<br> {{downLine.downVip[3]?downLine.downVip[3]:0}}
         </div>
@@ -77,7 +77,7 @@
       route: {
           data () {
               this.initUserSpread()
-              this.initUser()
+              // this.initUser()
           }
       }
   }
@@ -92,6 +92,11 @@
       color: #fff;
       font-size: 0.3rem;
       padding: 0.1rem 0.25rem;
+      &.disabled {
+        background: #999;
+        cursor: not-allowed;
+        pointer-events: none;
+      }
     }
     &-item {
       background: rgba(51, 69, 151, 0.6);
