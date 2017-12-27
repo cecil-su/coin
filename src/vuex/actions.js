@@ -20,7 +20,15 @@ export const setCoinType = ({dispatch}, val, coin, token) => {
   if (token !== undefined) {
     postTokenSignIn({dispatch}, val, token)
   }
-  if (window.localStorage.getItem('bhwCoinType') !== null && getCookie({dispatch}, 'bhw_sid')) {
+  let logined = false
+  isLogin({dispatch}).then(re => {
+    if (re) {
+      logined = true
+    } else {
+      logined = false
+    }
+  })
+  if (window.localStorage.getItem('bhwCoinType') !== null && logined) {
     http('user/change_coin', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'coin_type': val}).then(res => {
       if (res.error === 0) {
         _this.$suToast.center('', res.msg, 1000)
@@ -337,7 +345,8 @@ export const isLogin = ({dispatch}) => {
       return res
     }
   }).catch(err => {
-    _this.$suToast.center('', err.status, 1000)
+    console.log(err.status)
+    // _this.$suToast.center('', err.status, 1000)
     // _this.$suConsole.show('user/index', 'app failed', err.status)
   })
 }
