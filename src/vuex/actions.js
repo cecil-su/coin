@@ -191,7 +191,7 @@ export const initUserCog = ({dispatch}) => {
 }
 /* ----- 推广中心 -----*/
 export const initUserSpread = ({dispatch}) => {
-  setHeader({dispatch}, {'title': '推广中心', 'linkLeft': '/user/spread', 'textRight': '推广说明', 'linkRight': '/user/spread/info'})
+  setHeader({dispatch}, {'title': '推广中心', 'linkLeft': '/user', 'textRight': '推广说明', 'linkRight': '/user/spread/info'})
   http('user/downline', 'GET', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode}).then(res => {
       dispatch('SET_DOWNLINE', res)
   })
@@ -203,7 +203,16 @@ export const initUserSpreadInfo = ({dispatch}) => {
 }
 
 export const initUserSpreadLevel = ({dispatch}) => {
-  setHeader({dispatch}, {'title': '快速升级', 'linkLeft': '/user/spread'})
+    setHeader({dispatch}, {'title': '快速升级', 'linkLeft': '/user/spread'})
+}
+
+//快速升级接口
+export const postVipLevelUp = ({dispatch}, vip_rice) => {
+    http('user/vipLevel_upAction', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'vip_rice': vip_rice}).then(res => {
+        if (res.error === 0) {
+        } else {
+        }
+    })
 }
 
 export const initUserSpreadReward = ({dispatch}) => {

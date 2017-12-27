@@ -34,7 +34,7 @@
 </template>
 
 <script>
-    import {initUserSpreadLevel} from '../../vuex/actions'
+    import {initUserSpreadLevel, initUser} from '../../vuex/actions'
     export default {
         data () {
             return {
@@ -43,6 +43,7 @@
         },
         vuex: {
             actions: {
+//                initUser,
                 initUserSpreadLevel,
             },
             getters: {
@@ -51,6 +52,7 @@
         },
         route: {
             data () {
+//                this.initUser()
                 this.initUserSpreadLevel()
             }
         },
