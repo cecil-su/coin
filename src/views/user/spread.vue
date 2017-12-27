@@ -24,7 +24,7 @@
     <div class="coin-user-spread-item flex">
       <div class="flex-item text-center">
         <div>推广奖励</div>
-        <div class="text-small"><span class="text-big">789</span>MCC</div>
+        <div class="text-small"><span class="text-big">0</span>MCC</div>
         <a class="yellow" v-link="{name: 'user-spread-reward'}">查看明细</a>
       </div>
       <div class="flex-item text-center">
