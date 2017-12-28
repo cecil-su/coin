@@ -19,7 +19,7 @@
 
 <script>
   import scroll from '../../components/base/scroll'
-  import { initUserSpread, initUserSpreadPerson } from '../../vuex/actions'
+  import { initUserSpreadPerson } from '../../vuex/actions'
   export default {
     components: {
       suScroll: scroll
@@ -27,7 +27,6 @@
     vuex: {
       actions: {
         initUserSpreadPerson,
-        initUserSpread,
       },
       getters: {
           list: (state) => state.downLine.downlineData
@@ -36,7 +35,6 @@
     route: {
       data () {
         this.initUserSpreadPerson()
-        this.initUserSpread()
       }
     }
   }
