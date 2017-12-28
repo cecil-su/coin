@@ -1,6 +1,7 @@
 import Vue from 'vue'
 var _this = null
 var _scode = null
+var logined = false
 export const initApp = ({dispatch}, t, login) => {
   if (getCookie({dispatch}, 'bhw_scode') === '') {
     _scode = randomChar({dispatch}, 32)
@@ -20,15 +21,14 @@ export const setCoinType = ({dispatch}, val, coin, token) => {
   if (token !== undefined) {
     postTokenSignIn({dispatch}, val, token)
   }
-  let logined = false
-  isLogin({dispatch}).then(re => {
-    if (re) {
-      logined = true
-    } else {
-      logined = false
-    }
-  })
-  if (window.localStorage.getItem('bhwCoinType') !== null && logined) {
+  Vue.http({
+    headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+    url: window.Game.apiHost + 'user/index',
+    method: 'GET',
+    params: {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode}
+  }).then(checkStatus)
+  .then(parseJSON)
+  .then(res => {
     http('user/change_coin', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'coin_type': val}).then(res => {
       if (res.error === 0) {
         _this.$suToast.center('', res.msg, 1000)
@@ -41,13 +41,14 @@ export const setCoinType = ({dispatch}, val, coin, token) => {
         _this.$suToast.center('', res.msg, 1000)
       }
     })
-  } else {
+  }).catch(err => {
+    console.log(err.status)
     window.localStorage.setItem('bhwCoinType', val)
     window.localStorage.setItem('bhwCoinIcon', coin)
     setTimeout(() => {
       _this.$route.router.go({name: 'home'})
     }, 200)
-  }
+  })
 }
 export const isHasCoinType = ({dispatch}) => {
   let type = window.localStorage.getItem('bhwCoinType')

@@ -16,7 +16,7 @@
       <div class="link">
         <div class="flex between">
           <div class="flex center">推广链接：</div>
-          <div class="flex center" style="font-size: 0.25rem;">长按复制</div>
+          <div class="flex center" style="font-size: 0.25rem;" class="clipboard" :data-clipboard-text="'http://h5.owncoins.net/html/register.html?invite_id='+user.btzf_id">长按复制</div>
         </div>
         <div style="font-size: 0.23rem;margin-top: 0.3rem;">http://h5.owncoins.net/html/register.html?invite_id={{user.btzf_id}}</div>
       </div>
@@ -63,6 +63,7 @@
 
 <script>
   import { initUserSpread,initUser } from '../../vuex/actions'
+  import Clipboard from 'clipboard'
   export default {
       vuex: {
           actions: {
@@ -78,7 +79,15 @@
           data () {
               this.initUserSpread()
               // this.initUser()
+              new Clipboard('.clipboard')
           }
+      },
+      methods: {
+        handleCopy (e) {
+          let str = 'http://h5.owncoins.net/html/register.html?invite_id=' + this.user.btzf_id
+          e.clipboardData.setData('text/plain', str)
+          document.execCommand('copy')
+        }
       }
   }
 </script>
