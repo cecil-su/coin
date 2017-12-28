@@ -291,9 +291,6 @@ export const postSignUp = ({dispatch}, name, pwd, repwd) => {
 }
 /* ----- 修改用户信息 ----- */
 export const postChangeUser = ({dispatch}, url, name) => {
-  if (url !== '') {
-    url = url[url.length - 1].url
-  }
   http('user/modify_info', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'avatar': url, 'name': name}).then(res => {
     if (res.error === 0) {
       _this.$suToast.center('', res.msg, 1000)

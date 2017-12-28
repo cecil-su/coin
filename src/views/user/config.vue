@@ -5,7 +5,9 @@
         <div class="img">
           <img :src="user.avatar" alt="">
         </div>
-        <div class="btn"><su-upload name="编辑头像" :show="false" :replace.sync="user.avatar" @add="addFile"></su-upload></div>
+        <div class="btn" style="position: relative;">
+          <su-upload name="编辑头像" :show="false" :replace.sync="user.avatar" @add="addFile"></su-upload>
+        </div>
       </div>
       <div class="info">
         <div class="flex center">昵称：</div>
@@ -24,7 +26,7 @@
   export default {
     data () {
       return {
-        url: ''
+        url: '',
       }
     },
     components: {
@@ -40,8 +42,9 @@
       }
     },
     methods: {
-      addFile (file, list, res) {
-        this.url = res
+      addFile (file) {
+        this.user.avatar = file
+        this.url = file
       }
     },
     route: {
@@ -53,6 +56,9 @@
 </script>
 
 <style lang="less">
+  .file-uploads input {
+    display: none;
+  }
   .coin-user-config {
     padding: 0.5rem 0;
     &-box {
