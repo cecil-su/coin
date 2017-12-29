@@ -10,8 +10,8 @@
     </div>
     <div class="coin-user-charge-form-input" v-show="currentTabIndex == 0" style="margin-top: 0.5rem;">
       <su-input :value.sync="chargeNum" place="输入充值数量"></su-input>
-      <div style="color: #fff;font-size: 0.3rem;margin-top: 0.3rem;">可用数量：100GMC</div>
-      <a class="btn"></a>
+      <div style="color: #fff;font-size: 0.3rem;margin-top: 0.3rem;">可用数量：{{coin.btzf_coin_num}}{{coin.short}}</div>
+      <a class="btn" type="button" @click = "postChargeBtzf(chargeNum)"></a>
       <div style="color: #fff;font-size: 0.3rem;text-align: center;">充值成功后即时到账</div>
     </div>
     <div class="coin-user-charge-form" v-show="currentTabIndex == 1">
@@ -35,7 +35,7 @@
 
 <script>
   import input from '../../components/base/input'
-  import { initUserCharge } from '../../vuex/actions'
+  import { initUserCharge, postChargeBtzf } from '../../vuex/actions'
   export default {
     components: {
       suInput: input
@@ -49,7 +49,8 @@
     },
     vuex: {
       actions: {
-        initUserCharge      
+        initUserCharge,
+        postChargeBtzf
       },
       getters: {
         coin: (state) => state.user.coin_info,
@@ -67,7 +68,7 @@
       },
       handleCopy () {
         document.execCommand('Copy', 'false', this.coin.address)
-      }
+      },
     }
   }
 </script>

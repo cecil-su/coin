@@ -35,7 +35,7 @@
         <div class="flex center"><img src="../../assets/img/home/user-icon-4.png"></div>
         <div class="flex center">玩法说明</div>
       </a>
-      <a class="coin-user-list-item" v-if="user && user.btzf_id" v-link="{name: 'user-spread'}">
+      <a class="coin-user-list-item" v-if="user && user.btzf_id && user.btzf_id != 0" v-link="{name: 'user-spread'}">
         <div class="flex center">
           <div class="img-sp flex center">
             <img src="../../assets/img/home/user-icon-5.png">

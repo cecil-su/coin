@@ -232,6 +232,16 @@ export const postVipLevelUp = ({dispatch}, vip_rice) => {
     })
 }
 
+//比特支付直接充值
+export const postChargeBtzf  = ({dispatch}, amount) => {
+    http('user/charge_btzf', 'POST', {
+        'sid': getCookie({dispatch}, 'bhw_sid'),
+        'scode': _scode,
+        'amount': amount
+    }).then(res => {
+    })
+}
+
 export const initUserSpreadReward = ({dispatch}) => {
   setHeader({dispatch}, {'title': '推广奖励', 'linkLeft': '/user/spread'})
   http('user/downline_rebate', 'GET', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode}).then(res => {
