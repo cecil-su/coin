@@ -10,16 +10,16 @@
     </div>
     <div class="coin-user-charge-form-input" v-show="currentTabIndex == 0" style="margin-top: 0.5rem;">
       <su-input :value.sync="chargeNum" place="输入充值数量"></su-input>
-      <div style="color: #fff;font-size: 0.3rem;margin-top: 0.3rem;">可用数量：{{coin.btzf_coin_num}}{{coin.short}}</div>
-      <a class="btn" type="button" @click = "postChargeBtzf(chargeNum)"></a>
-      <div style="color: #fff;font-size: 0.3rem;text-align: center;">充值成功后即时到账</div>
+      <div style="color: #fff;font-size: 0.2rem;margin-top: 0.3rem;text-align: center;">可用数量：{{coin.btzf_coin_num}}{{coin.short}}</div>
+      <a class="btn" type="button" @click = "handleChargeBtzf()"></a>
+      <div style="color: #fff;font-size: 0.2rem;text-align: center;">充值成功后即时到账</div>
     </div>
     <div class="coin-user-charge-form" v-show="currentTabIndex == 1">
       <div class="coin-user-charge-form-input">
         <div class="text">{{coin.address}}</div>
       </div>
       <div class="coin-user-charge-form">
-        <a class="btn address" @click="handleCopy"></a>
+        <!--<a class="btn address" @click="handleCopy"></a>-->
         <div class="s">我们将在收到3次确认以后为您充值成功</div>
       </div>
     </div>
@@ -69,6 +69,14 @@
       handleCopy () {
         document.execCommand('Copy', 'false', this.coin.address)
       },
+      handleChargeBtzf(){
+          this.postChargeBtzf(this.chargeNum).then(res => {
+              if (res.error === 0) {
+                  this.coin.btzf_coin_num = ''
+                  this.chargeNum = ''
+              }
+          });
+      }
     }
   }
 </script>
@@ -149,7 +157,7 @@
         }
       }
       .b {color: red;font-size: 0.35rem;margin-bottom: 0.3rem;text-align: center;}
-      .s {font-size: 0.3rem;text-align: center;}
+      .s {font-size: 0.2rem;text-align: center;}
       .btn {
         background: url(../../assets/img/home/charge-btn.png) no-repeat center center;
         background-size: 100% 100%;

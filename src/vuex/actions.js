@@ -239,6 +239,25 @@ export const postChargeBtzf  = ({dispatch}, amount) => {
         'scode': _scode,
         'amount': amount
     }).then(res => {
+        if (res && res.error === 0) {
+            _this.$suToast.center('', res.msg, 1000)
+        } else {
+            _this.$suToast.center('', res.msg, 1000)
+        }
+        return res
+    })
+}
+
+//提币到比特支付
+export const postCashBtzf = ({dispatch}, num) => {
+    if (num === '' || num === undefined) { num = 0 }
+    return http('user/cash_btzf', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'amount': num}).then(res => {
+        if (res && res.error === 0) {
+            _this.$suToast.center('', res.msg, 1000)
+        } else {
+            _this.$suToast.center('', res.msg, 1000)
+        }
+        return res
     })
 }
 
