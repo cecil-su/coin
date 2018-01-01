@@ -13,11 +13,18 @@
         <div class="su-upload-progress" :style="{'width': + percent + '%'}"></div>
       </div>
     </div>
+    <div class="su-upload-crop" v-show="panel">
+      <div>
+        <img :src="url" id="image">
+      </div>
+      <button @click="crop">确定</button>
+    </div>
   </div>
 </template>
 
 <script>
   import { getCookie } from '../../vuex/actions'
+  import Cropper from 'cropperjs'
   const imageType = /^image\//
   export default {
     name: 'su-upload',
@@ -39,12 +46,31 @@
         $file: null,
         percent: 0,
         fileList: [],
-        res: []
+        res: [],
+        panel: false,
+        cropper: '',
+        croppable: false,
+        url: '',
+        file: {
+          name: '',
+          type: ''
+        }
       }
     },
     ready () {
       // this.$file = this.$el.getElementsByClassName('su-upload-file')[0]
       this.$file = document.getElementById('choose')
+      var image = document.getElementById('image')
+      let self = this
+      this.cropper = new Cropper(image, {
+        aspectRatio: 1,
+        viewMode: 1,
+        background: false,
+        zoomable: false,
+        ready: function () {
+          self.croppable = true
+        }
+      })
     },
     vuex: {
       actions: {
@@ -52,6 +78,34 @@
       }
     },
     methods: {
+      getObjectURL (file) {
+        var url = null
+        if (window.createObjectURL !== undefined) {
+          url = window.createObjectURL(file)
+        } else if (window.URL !== undefined) {
+          url = window.URL.createObjectURL(file)
+        } else if (window.webkitURL !== undefined) {
+          url = window.webkitURL.createObjectURL(file)
+        }
+        return url
+      },
+      crop () {
+        this.panel = false
+        if (!this.croppable) return 
+
+        this.cropper.getCroppedCanvas().toBlob((blob) => {
+          let file = new File([blob], this.file.name, {type: this.file.type})
+          // 判断是否是ios
+          if(!!window.navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
+              // iOS
+              this.transformFileToFormData(file);
+              return;
+          }
+
+          // 图片压缩之旅
+          transformFileToDataUrl(file);
+        })
+      },
       touchUp (e) {
         if (this.$file) {
           this.$file.click()
@@ -60,7 +114,7 @@
       },
       handleInputChange (e) {
         // 获取当前选中的文件
-        const file = event.target.files[0];
+        const file = e.target.files[0];
         const imgMasSize = 1024 * 1024 * 10; // 10MB
 
         // 检查文件类型
@@ -76,16 +130,13 @@
             // Toast.error("文件大小不能超过10MB！", 2000, undefined, false);
             return;
         }
-
-        // 判断是否是ios
-        if(!!window.navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
-            // iOS
-            this.transformFileToFormData(file);
-            return;
+        this.file.name = file.name
+        this.file.type = file.type
+        this.panel = true 
+        this.url = this.getObjectURL(file)
+        if (this.cropper) {
+          this.cropper.replace(this.url)
         }
-
-        // 图片压缩之旅
-        transformFileToDataUrl(file);
       },
       transformFileToFormData (file) {
         const formData = new FormData();
@@ -378,6 +429,18 @@
   @import '../../assets/css/less/z.less';
   .su-upload-file {display: none;}
   .su-upload {
+    position: relative;
+    &-crop {
+      bottom: 0;
+      left: 0;
+      position: fixed;
+      right: 0;
+      top: 0;
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
     &-action {
       // width: 20%;
     }

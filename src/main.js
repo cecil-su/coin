@@ -4,6 +4,7 @@ import VueResource from 'vue-resource'
 import routerMap from './routers'
 import { install } from './components/install'
 import App from './App'
+import 'cropperjs/dist/cropper.css'
 
 Vue.use(VueRouter)
 Vue.use(VueResource)

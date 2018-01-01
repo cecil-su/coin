@@ -123,8 +123,19 @@
         margin-right: 0.1rem;
         height: 5px;
         width: 5px;
+        position: relative;
         &.active {
-          background: red;
+          position: relative;
+          &:after {
+            background-color: #000;
+            border-radius: 50%;
+            content: '';
+            width: 6px;
+            height: 6px;
+            position: absolute;
+            left: -3px;
+            top: -3px;
+          }
         }
       }
     }
