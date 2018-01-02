@@ -26,6 +26,7 @@
   import { getCookie } from '../../vuex/actions'
   import Cropper from 'cropperjs'
   const imageType = /^image\//
+  const imgFile = {}
   export default {
     name: 'su-upload',
     props: {
@@ -103,7 +104,7 @@
           }
 
           // 图片压缩之旅
-          transformFileToDataUrl(file);
+          this.transformFileToDataUrl(file);
         })
       },
       touchUp (e) {
@@ -158,10 +159,10 @@
         const imgCompassMaxSize = 200 * 1024; // 超过 200k 就压缩
 
         // 存储文件相关信息
-        imgFile.type = file.type || 'image/jpeg'; // 部分安卓出现获取不到type的情况
-        imgFile.size = file.size;
-        imgFile.name = file.name;
-        imgFile.lastModifiedDate = file.lastModifiedDate;
+        this.imgFile.type = file.type || 'image/jpeg'; // 部分安卓出现获取不到type的情况
+        this.imgFile.size = file.size;
+        this.imgFile.name = file.name;
+        this.imgFile.lastModifiedDate = file.lastModifiedDate;
 
         // 封装好的函数
         const reader = new FileReader();
@@ -196,9 +197,9 @@
             let compressedDataUrl;
 
             if(shouldCompress){
-                compressedDataUrl = canvas.toDataURL(imgFile.type, 0.2);
+                compressedDataUrl = canvas.toDataURL(this.imgFile.type, 0.2);
             } else {
-                compressedDataUrl = canvas.toDataURL(imgFile.type, 1);
+                compressedDataUrl = canvas.toDataURL(this.imgFile.type, 1);
             }
 
             callback(compressedDataUrl);

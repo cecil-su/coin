@@ -72,7 +72,7 @@
       handleChargeBtzf(){
           this.postChargeBtzf(this.chargeNum).then(res => {
               if (res.error === 0) {
-                  this.coin.btzf_coin_num = ''
+                  this.coin.btzf_coin_num = res.coin
                   this.chargeNum = ''
               }
           });

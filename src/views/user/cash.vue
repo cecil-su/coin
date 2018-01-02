@@ -6,7 +6,7 @@
     </div>
     <div class="coin-user-charge-form">
       <div class="flex between">
-        <div class="ye" style="font-size: 0.2rem;text-align: center;">可用数量：{{user.coin}}</div>
+        <div class="ye" style="font-size: 0.2rem;text-align: center;margin:0 auto">可用数量：{{user.coin}}</div>
       </div>
       <div class="coin-user-charge-form-input">
         <su-input :value.sync="num" place="提币数量"></su-input>

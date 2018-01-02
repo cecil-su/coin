@@ -234,7 +234,7 @@ export const postVipLevelUp = ({dispatch}, vip_rice) => {
 
 //比特支付直接充值
 export const postChargeBtzf  = ({dispatch}, amount) => {
-    http('user/charge_btzf', 'POST', {
+    return http('user/charge_btzf', 'POST', {
         'sid': getCookie({dispatch}, 'bhw_sid'),
         'scode': _scode,
         'amount': amount
@@ -251,7 +251,11 @@ export const postChargeBtzf  = ({dispatch}, amount) => {
 //提币到比特支付
 export const postCashBtzf = ({dispatch}, num) => {
     if (num === '' || num === undefined) { num = 0 }
-    return http('user/cash_btzf', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'amount': num}).then(res => {
+    return http('user/cash_btzf', 'POST', {
+        'sid': getCookie({dispatch}, 'bhw_sid'),
+        'scode': _scode,
+        'amount': num
+    }).then(res => {
         if (res && res.error === 0) {
             _this.$suToast.center('', res.msg, 1000)
         } else {
