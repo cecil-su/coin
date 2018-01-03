@@ -15,7 +15,7 @@
     </div>
     <div class="su-upload-crop" v-show="panel">
       <div class="flex center">
-        <img :src="url" id="image" style="width: 6rem;">
+        <img :src="url" id="image">
       </div>
       <div class="flex center">
         <button @click="panel = false" style="border-radius: 0.45rem;height: 0.6rem;padding: 0 0.3rem;margin: 0.2rem;border: 1px solid #fff;">取消</button>
@@ -467,6 +467,10 @@
       flex-direction: column;
       justify-content: center;
       background-color: rgba(0,0,0,.5);
+      z-index: 1000;
+      #image {
+        width: 5rem;
+      }
     }
     &-action {
       // width: 20%;
