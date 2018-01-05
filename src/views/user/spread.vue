@@ -54,7 +54,7 @@
           代理人<br> {{downLine.downVip[4]?downLine.downVip[4]:0}}
         </div>
         <div class="text-center">
-          合伙人<br> {{downLine.downVip[5]?downLine.downVip[5]:0}}
+          合伙人 <br> {{downLine.downVip[5]?downLine.downVip[5]:0}}
         </div>
       </div>
     </div>

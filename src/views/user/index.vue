@@ -23,14 +23,14 @@
         <div class="flex center"><img src="../../assets/img/home/user-icon-1.png"></div>
         <div class="flex center">修改资料</div>
       </a>
-      <a class="coin-user-list-item" v-link="{name: 'password'}">
-        <div class="flex center"><img src="../../assets/img/home/user-icon-2.png"></div>
-        <div class="flex center">修改密码</div>
-      </a>
-      <a class="coin-user-list-item" v-link="{name: 'user-cog'}">
-        <div class="flex center"><img src="../../assets/img/home/user-icon-3.png"></div>
-        <div class="flex center">设置</div>
-      </a>
+      <!--<a class="coin-user-list-item" v-link="{name: 'password'}">-->
+        <!--<div class="flex center"><img src="../../assets/img/home/user-icon-2.png"></div>-->
+        <!--<div class="flex center">修改密码</div>-->
+      <!--</a>-->
+      <!--<a class="coin-user-list-item" v-link="{name: 'user-cog'}">-->
+        <!--<div class="flex center"><img src="../../assets/img/home/user-icon-3.png"></div>-->
+        <!--<div class="flex center">设置</div>-->
+      <!--</a>-->
       <a class="coin-user-list-item" v-link="{name: 'user-about'}">
         <div class="flex center"><img src="../../assets/img/home/user-icon-4.png"></div>
         <div class="flex center">玩法说明</div>

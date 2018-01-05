@@ -43,7 +43,6 @@
         },
         vuex: {
             actions: {
-//                initUser,
                 initUserSpreadLevel,
                 postVipLevelUp
             },
@@ -53,7 +52,6 @@
         },
         route: {
             data () {
-//                this.initUser()
                 this.initUserSpreadLevel()
             }
         },

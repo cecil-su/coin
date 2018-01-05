@@ -219,8 +219,8 @@ export const initUserSpreadLevel = ({dispatch}) => {
 }
 
 //快速升级接口
-export const postVipLevelUp = ({dispatch}, vip_rice) => {
-    http('user/vipLevel_upAction', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'vip_rice': vip_rice}).then(res => {
+export const postVipLevelUp = ({dispatch}, vip_level) => {
+    http('user/viplevel_up', 'POST', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode, 'vip_level': vip_level}).then(res => {
         if (res.error === 0) {
           _this.$suToast.center('', res.msg, 1000)
           http('user/index', 'GET', {'sid': getCookie({dispatch}, 'bhw_sid'), 'scode': _scode}).then(res => {
