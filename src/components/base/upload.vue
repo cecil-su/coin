@@ -1,7 +1,7 @@
 <template>
   <div class="su-upload">
     <div class="su-upload-action">
-      <input type="file" class="su-upload-file" id="choose">
+      <input type="file" class="su-upload-file" id="choose" :value="inputValue">
       <div class="su-upload-btn add" @click="touchUp">{{name}}</div>
     </div>
     <div class="su-upload-preview clear" v-if="show">
@@ -14,10 +14,14 @@
       </div>
     </div>
     <div class="su-upload-crop" v-show="panel">
-      <div>
+      <div class="flex center">
         <img :src="url" id="image">
       </div>
-      <button @click="crop">确定</button>
+      <div class="flex center">
+        <button @click="panel = false" style="border-radius: 0.45rem;height: 0.6rem;padding: 0 0.3rem;margin: 0.2rem;border: 1px solid #fff;">取消</button>
+        <button @click="crop" style="border-radius: 0.45rem;height: 0.6rem;padding: 0 0.3rem;margin: 0.2rem;border: 1px solid #fff;">确定</button>
+      </div>
+      
     </div>
   </div>
 </template>
@@ -44,6 +48,7 @@
     },
     data () {
       return {
+        inputValue: '',
         $file: null,
         percent: 0,
         fileList: [],
@@ -94,11 +99,17 @@
         this.panel = false
         if (!this.croppable) return 
 
-        this.cropper.getCroppedCanvas().toBlob((blob) => {
+        this.cropper.getCroppedCanvas({
+          width: 160,
+          height: 160,
+          fillColor: '#fff',
+          imageSmoothingQuality: 'low'
+        }).toBlob((blob) => {
           let file = new File([blob], this.file.name, {type: this.file.type})
           // 判断是否是ios
           if(!!window.navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
               // iOS
+              console.log('ios')
               this.transformFileToFormData(file);
               return;
           }
@@ -109,14 +120,16 @@
       },
       touchUp (e) {
         if (this.$file) {
+          this.$file.value = ''
           this.$file.click()
           this.$file.addEventListener('change', this.handleInputChange)
         }
       },
       handleInputChange (e) {
         // 获取当前选中的文件
+        this.panel = true 
         const file = e.target.files[0];
-        const imgMasSize = 1024 * 1024 * 10; // 10MB
+        const imgMasSize = 1024 * 1024 * 2; // 2MB
 
         // 检查文件类型
         if(['jpeg', 'png', 'gif', 'jpg'].indexOf(file.type.split("/")[1]) < 0){
@@ -132,12 +145,22 @@
             return;
         }
         this.file.name = file.name
-        this.file.type = file.type
+        // this.file.type = file.type
+        this.file.type = 'image/png'
         this.panel = true 
         this.url = this.getObjectURL(file)
         if (this.cropper) {
           this.cropper.replace(this.url)
         }
+        // if(!!window.navigator.userAgent.match(/\(i[^;]+;( U;)? CPU.+Mac OS X/)){
+        //   // iOS
+        //   console.log('ios')
+        //   this.transformFileToFormData(file);
+        //   return;
+        // }
+
+        // // 图片压缩之旅
+        // this.transformFileToDataUrl(file);
       },
       transformFileToFormData (file) {
         const formData = new FormData();
@@ -145,7 +168,7 @@
         // type
         formData.append('type', file.type);
         // size
-        formData.append('size', file.size || "image/jpeg");
+        formData.append('size', file.size || "image/png");
         // name
         formData.append('name', file.name);
         // lastModifiedDate
@@ -156,25 +179,26 @@
         this.uploadImg(formData);
       },
       transformFileToDataUrl (file) {
+        console.log()
         const imgCompassMaxSize = 200 * 1024; // 超过 200k 就压缩
 
         // 存储文件相关信息
-        this.imgFile.type = file.type || 'image/jpeg'; // 部分安卓出现获取不到type的情况
-        this.imgFile.size = file.size;
-        this.imgFile.name = file.name;
-        this.imgFile.lastModifiedDate = file.lastModifiedDate;
-
+        imgFile.type = file.type || 'image/jpeg'; // 部分安卓出现获取不到type的情况
+        imgFile.size = file.size;
+        imgFile.name = file.name;
+        imgFile.lastModifiedDate = file.lastModifiedDate;
         // 封装好的函数
         const reader = new FileReader();
 
         // file转dataUrl是个异步函数，要将代码写在回调里
+        let self = this
         reader.onload = function(e) {
             const result = e.target.result;
 
             if(result.length < imgCompassMaxSize) {
-              this.compress(result, processData, false );    // 图片不压缩
+              self.compress(result, self.processData, false );    // 图片不压缩
             } else {
-              this.compress(result, processData);            // 图片压缩
+              self.compress(result, self.processData);            // 图片压缩
             }
         };
 
@@ -197,9 +221,9 @@
             let compressedDataUrl;
 
             if(shouldCompress){
-                compressedDataUrl = canvas.toDataURL(this.imgFile.type, 0.2);
+                compressedDataUrl = canvas.toDataURL(imgFile.type, 0.2);
             } else {
-                compressedDataUrl = canvas.toDataURL(this.imgFile.type, 1);
+                compressedDataUrl = canvas.toDataURL(imgFile.type, 1);
             }
 
             callback(compressedDataUrl);
@@ -207,10 +231,9 @@
       },
       processData (dataURL) {
         // 这里使用二进制方式处理dataUrl
-        const binaryString = window.atob(dataUrl.split(',')[1]);
+        const binaryString = window.atob(dataURL.split(',')[1]);
         const arrayBuffer = new ArrayBuffer(binaryString.length);
         const intArray = new Uint8Array(arrayBuffer);
-        const imgFile = this.imgFile;
 
         for (let i = 0, j = binaryString.length; i < j; i++) {
             intArray[i] = binaryString.charCodeAt(i);
@@ -221,12 +244,14 @@
         let blob;
 
         try {
-            blob = new Blob(data, { type: imgFile.type });
+            // blob = new window.Blob(data, { type: imgFile.type });
+            blob = this.getBlob(data, 'image/png')
         } catch (error) {
             window.BlobBuilder = window.BlobBuilder ||
                 window.WebKitBlobBuilder ||
                 window.MozBlobBuilder ||
                 window.MSBlobBuilder;
+            console.log(window.BlobBuilder)
             if (error.name === 'TypeError' && window.BlobBuilder){
                 const builder = new BlobBuilder();
                 builder.append(arrayBuffer);
@@ -441,6 +466,11 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      background-color: rgba(0,0,0,.5);
+      z-index: 1000;
+      #image {
+        width: 5rem;
+      }
     }
     &-action {
       // width: 20%;
